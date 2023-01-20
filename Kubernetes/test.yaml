@@ -2,32 +2,34 @@
 apiVersion: apps/v1 # for versions before 1.9.0 use apps/v1beta2
 kind: Deployment
 metadata:
-  name: nginx
+  namespace: eks-demo
+  name: app-eks-demo
 spec:
   strategy:
     type: Recreate
   selector:
     matchLabels:
-      app: nginx
+      app: app-eks-demo
   replicas: 3 
   template: 
     metadata:
       labels:
-        app: nginx
+        app: app-eks-demo
     spec:
       containers:
-      - name: nginx
-        image: nginx
+      - name: app-eks-demo
+        image: CONTAINER_IMAGE
+        imagePullPolicy: Always
         ports:
         - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: nginx
-  namespace: default
+  name: app-eks-demo-service
+  namespace: eks-demo
   labels:
-    app: nginx
+    app: app-eks-demo
   annotations:
     service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
 spec:
@@ -38,5 +40,5 @@ spec:
     protocol: TCP
     targetPort: 80
   selector:
-    app: nginx
+    app: app-eks-demo
   type: LoadBalancer
