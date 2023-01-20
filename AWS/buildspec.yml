@@ -31,6 +31,6 @@ phases:
       - echo kubectl create namespace eks-demo
      # - kubectl apply -f Kubernetes/eks-deployment.yml 
      # - printf '[{"name":"eks-deployment","imageUri":"%s"}]' $REPOSITORY:$TAG > build.json
-      - kubectl apply -f Kubernetes/test.yaml
+      - kubectl apply -f Kubernetes/eks-deployment.yml
 artifacts:
   files: build.json
