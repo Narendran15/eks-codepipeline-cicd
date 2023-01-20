@@ -32,5 +32,6 @@ spec:
     app: app-eks-demo
   ports:
   - port: 80
+  - targetPort: 8080
 
 
