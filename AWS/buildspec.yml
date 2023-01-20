@@ -29,7 +29,8 @@ phases:
       - export AWS_EXPIRATION=$(echo ${CREDENTIALS} | jq -r '.Credentials.Expiration')
       - aws eks update-kubeconfig --name $EKS_CLUSTER_NAME
       - echo kubectl create namespace eks-demo
-      - kubectl apply -f Kubernetes/eks-deployment.yml 
-      - printf '[{"name":"eks-deployment","imageUri":"%s"}]' $REPOSITORY:$TAG > build.json
+     # - kubectl apply -f Kubernetes/eks-deployment.yml 
+     # - printf '[{"name":"eks-deployment","imageUri":"%s"}]' $REPOSITORY:$TAG > build.json
+      - kubectl apply -f Kubernetes/test.yaml
 artifacts:
   files: build.json
